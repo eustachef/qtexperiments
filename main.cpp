@@ -16,7 +16,8 @@ int main(int argc, char ** argv)
     auto marker2 = std::make_shared<Marker>("marker 2");
     marker2->setLowBattery(true);
     markerList.add(marker2);
-    markerList.add(std::make_shared<Marker>("marker 3"));
+    auto marker3 = std::make_shared<Marker>("marker 3");
+    markerList.add(marker3);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     LowBatteryMarkerList lowBatteryMarkerList;
@@ -37,6 +38,12 @@ int main(int argc, char ** argv)
         auto marker = std::make_shared<Marker>("marker 4");
         marker->setLowBattery(true);
         markerList.add(marker);
+    } );
+
+    // modifying an existing marker with low battery
+    QTimer::singleShot(3000, [&]() {
+        marker3->setLowBattery(true);
+        lowBatteryMarkerList.filter();
     } );
 
     // adding a marker with normal battery

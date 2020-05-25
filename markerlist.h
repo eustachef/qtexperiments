@@ -37,6 +37,7 @@ class LowBatteryMarkerList : public QSortFilterProxyModel
 
 public:
     LowBatteryMarkerList(QObject *parent = 0);
+    void filter() {this->invalidateFilter();}
 
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
